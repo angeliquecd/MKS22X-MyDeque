@@ -1,5 +1,3 @@
-
-
 public class MyDeque<E>{
   private E[] data;
   private int size, start, end;
@@ -26,7 +24,7 @@ public class MyDeque<E>{
     int inc =0;
     int level=0;
     E ending= (E) new Object();
-    while (inc<size){
+    while (inc<size){//idea: it works backward until it finds the end and then works forwards until it finds the end
       E workingwith = data[(total+level)%size];
       if ((total+level)%size!=end){
       value+=workingwith+" ";
@@ -42,8 +40,8 @@ public class MyDeque<E>{
   }
   public void addFirst(E element){
     try{
-      if (element == null) throw new NullPointerException();
-      data[size]=data[start];
+    if (element == null) throw new NullPointerException();
+    data[size]=data[start];
      data[start]=element;
      size++;
     if (size>=data.length) resize();
