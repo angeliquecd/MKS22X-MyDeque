@@ -5,13 +5,17 @@ public class MyDriver{
     System.out.println(list);
     list.addLast(2);
     System.out.println(list);
-    list.addFirst(3);
+    list.addLast(3);
     System.out.println(list);
     list.addLast(4);
     System.out.println(list);
     list.addLast(6);
     System.out.println(list);
     list.addLast(2);
+    System.out.println(list);
+    list.addFirst(1);
+    System.out.println(list);
+    list.addLast(10);
     System.out.println(list);
     System.out.println(list.size());
   }

@@ -43,14 +43,15 @@ public class MyDeque<E>{
   public void addFirst(E element){
     try{
       if (element == null) throw new NullPointerException();
-	   start=size;
-     data[size]=element;
+      data[size]=data[start];
+     data[start]=element;
      size++;
     if (size>=data.length) resize();
 	}
   catch (NullPointerException e){
     e.printStackTrace();
   }}
+
   public void addLast(E element){
     try{
       if (element == null) throw new NullPointerException();
@@ -59,28 +60,33 @@ public class MyDeque<E>{
 	size++;
   if (size>=data.length) resize();
 }
+
 catch (NullPointerException e){
   e.printStackTrace();
 }}
   public E removeFirst(){
-    try{
-    if (size==0) throw new NoSuchElementException() ;
+  //  try{
+  //  if (size==0) throw new NoSuchElementException() ;
     if (start+1!=end && start+1<size) start = start+1;
 	size--;
-  return data[start];}
-  catch(NoSuchElementException e){
-    e.printStackTrace();
-  }}
+  return data[start];
+//}
+  //catch(NoSuchElementException e){
+    //e.printStackTrace();
+//  }
+}
   public E removeLast(){
-    try{
-  if (size==0) throw new NoSuchElementException();
+  //  try{
+  //if (size==0) throw new NoSuchElementException();
 	int endy =end;
 	end = size;
 	size--;
-	return data[endy];}
-  catch (NoSuchElementException e){
-    e.printStackTrace();
-  }}
+	return data[endy];
+//}
+  //catch (NoSuchElementException e){
+    //e.printStackTrace();
+//  }
+}
 //pop
 
    @SuppressWarnings("unchecked")
