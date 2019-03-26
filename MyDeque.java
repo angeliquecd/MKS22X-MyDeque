@@ -23,26 +23,30 @@ public class MyDeque<E>{
 
      @SuppressWarnings("unchecked")
   public String toString(){
+    int capacity=data.length;
     String value ="";
     int total =start;
     int inc =0;
     int level=0;
-    boolean goneback = false;
+  //  boolean goneback = false;
     E ending= (E) new Object();
     while (inc<size){//idea: it works backward until it finds the end and then works forwards until it finds the end
-      E workingwith = data[(total+level)%size];
-      if ((total+level)%size!=end){
+      //was a bad idea ^^
+      int index=(total+level)%capacity;
+      //System.out.println(index);
+      E workingwith = data[index];
+      if (index!=end){
       value+=workingwith+" ";
+    //  System.out.println(value);
       inc++;
-      level--;
-      goneback =true;}
-      else{
-        if (goneback){
-        ending = workingwith;
-        inc++;
-        level++;
-      }
-    }}
+      level++;
+    }
+    else{
+       ending =workingwith;
+      level++;
+      inc++;
+    }
+  }
     return value+ending;
 }
 public String debug(){
@@ -50,7 +54,7 @@ public String debug(){
   for (E element: data){
     value+=" "+element;
   }
-  return value;
+  return "start: "+start+" end: "+end+" \n"+ value;
 }
   public void addFirst(E element){
     try{
@@ -68,10 +72,12 @@ public String debug(){
         start-=1;
       }
       size++;//increases the size of the list
+    //  System.out.println("added"+element);
     }
   catch (NullPointerException e){
     e.printStackTrace();
-  }}
+  }
+}
 
   public void addLast(E element){
     try{
@@ -87,6 +93,7 @@ public String debug(){
         }
 	       size++;
          if (size>=data.length) resize();
+        // System.out.println("added"+element);
 }
 catch (NullPointerException e){
   e.printStackTrace();
