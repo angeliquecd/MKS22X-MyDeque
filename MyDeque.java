@@ -1,3 +1,4 @@
+import java.util.*;
 public class MyDeque<E>{
   private E[] data;
   private int size, start, end;
@@ -41,9 +42,9 @@ public class MyDeque<E>{
         inc++;
         level++;
       }
-    }
+    }}
     return value+ending;
-}}
+}
 public String debug(){
   String value ="";
   for (E element: data){
@@ -57,7 +58,6 @@ public String debug(){
     if (element == null) throw new NullPointerException();
     if(size==0){//when list is empty
         data[0] = element;
-        end=1;
       }
     else if(start == 0){
         data[capacity-1] = element;//adds it to the very back of the array
@@ -75,9 +75,16 @@ public String debug(){
 
   public void addLast(E element){
     try{
+      int capacity=data.length;//makes use of full array
       if (element == null) throw new NullPointerException();
-	     data[size]=element;
-	      end = size;
+      if (end==capacity-1){
+        data[capacity-1]=element;
+        end=capacity-1;
+        }
+        else{
+          data[end+1]=element;
+          end+=1;
+        }
 	       size++;
          if (size>=data.length) resize();
 }
@@ -88,7 +95,7 @@ catch (NullPointerException e){
 
   public E removeFirst(){
     try{
-    if (size==0) throw new NoSuchElementException() ;
+    if (size==0) throw new NoSuchElementException();
     E toreturn = data[start];
     start-=1;
 	size--;
@@ -97,6 +104,7 @@ catch (NullPointerException e){
 catch(NoSuchElementException e){
     e.printStackTrace();
   }
+  return null;
 }
 
   public E removeLast(){
@@ -110,17 +118,33 @@ catch(NoSuchElementException e){
   catch (NoSuchElementException e){
     e.printStackTrace();
   }
+return null;
 }
 //pop
 
    @SuppressWarnings("unchecked")
   private void resize(){//if it reaches capacity, resize to make it twice as big
+    //System.out.println("resizing");
     int newlength = 2*data.length;
     E[] newdata = (E[]) new Object[newlength];
+    if (start<end){//in the rare case data isn't twisted
     for (int i =0;i<data.length;i++){
       newdata[i]=data[i];
     }
-    data=newdata;
+    data=newdata;}
+  else{
+    for (int h=start;h<data.length;h++){
+      newdata[h-start]=data[h];//works from start to back
+    }
+    int spot=data.length-start;
+    for (int a=0;a<=end;a++){//works with ending stuff and tacks it on
+      newdata[spot]=data[a];
+      spot++;
+    }
+  }
+  start=0;
+  end=size;//by design
+  data=newdata;
   }
 
   public E getFirst(){
