@@ -53,12 +53,22 @@ public String debug(){
 }
   public void addFirst(E element){
     try{
+      int capacity = data.length;
     if (element == null) throw new NullPointerException();
-     data[size]=element;
-     start=size;
-     size++;
-    if (size>=data.length) resize();
-	}
+    if(size==0){//when list is empty
+        data[0] = element;
+        end=1;
+      }
+    else if(start == 0){
+        data[capacity-1] = element;//adds it to the very back of the array
+        start = capacity-1;//sets start to right spot
+      }
+      else{//works its way backward?
+        data[start - 1] = element;
+        start-=1;
+      }
+      size++;//increases the size of the list
+    }
   catch (NullPointerException e){
     e.printStackTrace();
   }}
@@ -66,46 +76,40 @@ public String debug(){
   public void addLast(E element){
     try{
       if (element == null) throw new NullPointerException();
-	data[size]=element;
-	end = size;
-	size++;
+	     data[size]=element;
+	      end = size;
+	       size++;
+         if (size>=data.length) resize();
 }
 catch (NullPointerException e){
   e.printStackTrace();
 }}
+
+
   public E removeFirst(){
-    data[start]=null;
-    if (start+1!=end && start+1<size) start = start+1;
+    try{
+    if (size==0) throw new NoSuchElementException() ;
+    E toreturn = data[start];
+    start-=1;
 	size--;
-  return data[start];
-
-
-  if (size>=data.length) resize();
+  return toreturn;
 }
-
-  public E removeFirst(){
-  //  try{
-  //  if (size==0) throw new NoSuchElementException() ;
-    if (start+1!=end && start+1<size) start = start+1;
-	size--;
-  return data[start];
-//}
-  //catch(NoSuchElementException e){
-    //e.printStackTrace();
-//  }
+catch(NoSuchElementException e){
+    e.printStackTrace();
+  }
 }
 
   public E removeLast(){
-  //  try{
-  //if (size==0) throw new NoSuchElementException();
-	int endy =end;
-	end = size;
+    try{
+  if (size==0) throw new NoSuchElementException();
+	E endy =data[end];
+	end-=1;
 	size--;
-	return data[endy];
-//}
-  //catch (NoSuchElementException e){
-    //e.printStackTrace();
-//  }
+	return endy;
+}
+  catch (NoSuchElementException e){
+    e.printStackTrace();
+  }
 }
 //pop
 
