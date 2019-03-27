@@ -24,7 +24,7 @@ public class MyDeque<E>{
      @SuppressWarnings("unchecked")
   public String toString(){
     int capacity=data.length;
-    String value ="";
+    String value ="{";
     int total =start;
     int inc =0;
     int level=0;
@@ -36,7 +36,7 @@ public class MyDeque<E>{
       //System.out.println(index);
       E workingwith = data[index];
       if (index!=end){
-      value+=workingwith+" ";
+      value+=workingwith+", ";
     //  System.out.println(value);
       inc++;
       level++;
@@ -47,7 +47,8 @@ public class MyDeque<E>{
       inc++;
     }
   }
-    return value+ending;
+    if(size>0)return value+ending+"}";
+    else return "{}";
 }
 public String debug(){
   String value ="";
@@ -72,6 +73,7 @@ public String debug(){
         start-=1;
       }
       size++;//increases the size of the list
+      if (size>=capacity) resize();
     //  System.out.println("added"+element);
     }
   catch (NullPointerException e){
@@ -87,12 +89,15 @@ public String debug(){
         data[capacity-1]=element;
         end=capacity-1;//won't work later on!
         }
+      else if (size==0){
+        data[0]=element;
+      }
         else{
           data[end+1]=element;
           end+=1;
         }
 	       size++;
-         if (size>=data.length) resize();
+         if (size>=capacity) resize();
         // System.out.println("added"+element);
 }
 catch (NullPointerException e){
@@ -133,7 +138,7 @@ return null;
 
    @SuppressWarnings("unchecked")
   private void resize(){//if it reaches capacity, resize to make it twice as big
-    //System.out.println("resizing");
+    System.out.println("resizing");
     int newlength = 2*data.length;
     E[] newdata = (E[]) new Object[newlength];
     if (start<end){//in the rare case data isn't twisted
@@ -152,12 +157,14 @@ return null;
     }
   }
   start=0;
-  end=size;//by design
+  end=size-1;//by design
   data=newdata;
   }
 
   public E getFirst(){
+    if (size==0) throw new NoSuchElementException();
 	return data[start]; }//do not remove the element
   public E getLast(){
+    if (size==0) throw new NoSuchElementException();
 	return data[end]; }
 }
