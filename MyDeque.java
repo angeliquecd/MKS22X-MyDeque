@@ -58,13 +58,12 @@ public String debug(){
   return "start: "+start+" end: "+end+" \n"+ value;
 }
   public void addFirst(E element){
-    try{
       int capacity = data.length;
     if (element == null) throw new NullPointerException();
     if(size==0){//when list is empty
         data[0] = element;
       }
-    else if(start == 0){
+    else if(start == 0){//if only one element has been added(or just resized)
         data[capacity-1] = element;//adds it to the very back of the array
         start = capacity-1;//sets start to right spot
       }
@@ -75,19 +74,14 @@ public String debug(){
       size++;//increases the size of the list
       if (size>=capacity) resize();
     //  System.out.println("added"+element);
-    }
-  catch (NullPointerException e){
-    e.printStackTrace();
-  }
 }
 
   public void addLast(E element){
-    try{
       int capacity=data.length;//makes use of full array
       if (element == null) throw new NullPointerException();
       if (end==capacity-1){
-        data[capacity-1]=element;
-        end=capacity-1;//won't work later on!
+        data[capacity-2]=element;
+        end=capacity-2;//won't work later on!
         }
       else if (size==0){
         data[0]=element;
@@ -100,28 +94,20 @@ public String debug(){
          if (size>=capacity) resize();
         // System.out.println("added"+element);
 }
-catch (NullPointerException e){
-  e.printStackTrace();
-}}
+
 
 
   public E removeFirst(){
-    try{
     if (size==0) throw new NoSuchElementException();
     E toreturn = data[start];
     if(size!=1){
     start+=1;}
 	   size--;
   return toreturn;
-}
-catch(NoSuchElementException e){
-    e.printStackTrace();
-  }
-  return null;
+
 }
 
   public E removeLast(){
-    try{
   if (size==0) throw new NoSuchElementException();
 	E endy =data[end];
   if (size!=1){
@@ -129,16 +115,11 @@ catch(NoSuchElementException e){
 	size--;}
 	return endy;
 }
-  catch (NoSuchElementException e){
-    e.printStackTrace();
-  }
-return null;
-}
 //pop
 
    @SuppressWarnings("unchecked")
   private void resize(){//if it reaches capacity, resize to make it twice as big
-    System.out.println("resizing");
+    //System.out.println("resizing");
     int newlength = 2*data.length;
     E[] newdata = (E[]) new Object[newlength];
     if (start<end){//in the rare case data isn't twisted
