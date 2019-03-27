@@ -5,23 +5,52 @@ public class Calculator{
      */
     public static double eval(String s){
       String[] operations = new String[s.length()];
-      double[] values = new double[s.length()];
+      MyDeque<Double> values = new MyDeque<Double>(s.length());
       String[] everything =s.split(" ");
       int index1 =0;
       int index2 = 0;
       for (int a=0;a<everything.length;a++){
         if (isnum(everything[a])) {
-          values[index1]=Double.parseDouble(everything[a]);
+          values.addLast(Double.parseDouble(everything[a]));
           index1++;}
         else {
           operations[index2]=everything[a];
           index2++;
         }
       }
-      System.out.println(debug(values));
+      int i=0;
+      int j=0;
+      boolean starting=true;
+      while (values.size()>2||starting){
+        double primary = values.removeFirst();
+        double secondary= values.getFirst();
+        System.out.println("primary: "+primary+" secondary: "+secondary+"size: "+values.size());
+        if (operations[j].equals("+")){
+          System.out.println("here");
+          System.out.println(values);
+          double sum = primary+secondary;
+          System.out.println(sum);
+          values.addLast(sum);
+          values.removeFirst();
+          System.out.println(values);
+        }
+        else if (operations[j].equals("-")){
+          values.addFirst(primary-secondary);
+        }
+        else if (operations[j].equals("/")){
+          values.addFirst(primary*secondary);
+        }
+        else if (operations[j].equals("*")){
+          values.addFirst(primary/secondary);
+        }
+        i+=2;
+        j++;
+        starting=false;
+      }
+      System.out.println(values);
       System.out.println(debug(operations));
       System.out.println(debug(everything));
-      return 2;
+      return values.getLast();
     }
     public static boolean isnum(String a){
       try{
@@ -47,6 +76,6 @@ public class Calculator{
       return value;
     }
     public static void main(String[] args){
-      eval("1 2 +");
+      System.out.println(eval("3 5 +"));
     }
 }
