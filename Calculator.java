@@ -3,55 +3,55 @@ public class Calculator{
     /*Evaluate a postfix expression stored in s.
      *Assume valid postfix notation, separated by spaces.
      */
-     public static double eval2(String s){
+     public static double eval(String s){//actually version 2
        MyDeque<Double> values = new MyDeque<Double>(s.length());
        String[] stuff =s.split(" ");
        for (int i=0;i<stuff.length;i++){
          String place = stuff[i];
-         if (isnum(place)){
-           values.addLast(Double.parseDouble(place));
-             System.out.println(values);
+         if (isnum(place)){//until you get to operation
+           values.addLast(Double.parseDouble(place));//adds up the whole thing
+             //System.out.println(values);
          }
          else{
            double secondary = values.removeLast();
            double primary = values.removeLast();
            if (place.equals("+")){
              //System.out.println("here");
-             System.out.println(values);
+            // System.out.println(values);
              double sum = primary+secondary;
            //  System.out.println(sum);
              values.addLast(sum);
 
-            System.out.println(values);
+          //  System.out.println(values);
            }
            else if (place.equals("-")){
              double diff = primary-secondary;
-                System.out.println(values);
+              //  System.out.println(values);
            //  System.out.println(sum);
              values.addLast(diff);
-               System.out.println(values);
+              // System.out.println(values);
            }
            else if (place.equals("/")){
              double quo = primary/secondary;
-                System.out.println(values);
+            //    System.out.println(values);
            //  System.out.println(sum);
              values.addLast(quo);
-               System.out.println(values);
+            //   System.out.println(values);
            }
            else if (place.equals("*")){
              double pro = primary*secondary;
 
            //  System.out.println(sum);
              values.addLast(pro);
-               System.out.println(values);
+            //   System.out.println(values);
            }
            else if (place.equals("%")){
              double mod = primary*secondary;
            //  System.out.println(sum);
              values.addLast(mod);
-              System.out.println(values);
+            //  System.out.println(values);
            }
-         }
+         }//adds values to the end after doing the stuff so that you can work with them again
        }
        return values.getFirst();
      }
@@ -139,8 +139,8 @@ public class Calculator{
          }
        }
        return values.getFirst();
-     }
-    public static double eval(String s){
+     }//proof that i tried
+    public static double eval2(String s){
       String[] operations = new String[s.length()];
       MyDeque<Double> values = new MyDeque<Double>(s.length());
       String[] everything =s.split(" ");
@@ -195,7 +195,7 @@ public class Calculator{
 
       }
       //System.out.println(values);
-      //System.out.println(debug(operations));
+      //System.out.println(debug(operations));//more proof that i tried
     //  System.out.println(debug(everything));
       return values.getLast();
     }
@@ -224,12 +224,12 @@ public class Calculator{
       return value;
     }
     public static void main(String[] args){
-      /*System.out.println(eval("3 5 +"));
+      System.out.println(eval("3 5 +"));
       System.out.println(eval("10 2.0 +"));
       System.out.println(eval("11 3 - 4 + 2.5 *") );
       System.out.println(eval("8 2 + 99 9 - * 2 + 9 -")) ;
       System.out.println(eval("1 2 3 4 5 + * - -")) ;
-*/
+/*
       System.out.println("Answer: " + eval2("3 5 +"));//8
       System.out.println("Answer: " +eval2("10 2.0 +"));//12
       System.out.println("Answer: " +eval2("11 3 - 4 + 2.5 *") );//30

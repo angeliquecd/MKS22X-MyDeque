@@ -87,6 +87,8 @@ public String debug(){
         }
       else if (size==0){
         data[0]=element;
+        start=0;
+        end=0;
       }
         else{
           data[end+1]=element;
@@ -103,8 +105,13 @@ public String debug(){
     if (size==0) throw new NoSuchElementException();
     E toreturn = data[start];
     if(size!=1){
-    start+=1;}
-	   size--;
+    start+=1;
+   size--;}
+    else{
+      size=0;
+      start=0;
+      end=0;
+    }
   return toreturn;
 
 }
@@ -112,9 +119,10 @@ public String debug(){
   public E removeLast(){
   if (size==0) throw new NoSuchElementException();
 	E endy =data[end];
-  if (size!=1){
+  if (end!=0){
 	end-=1;
-	size--;}
+}
+  size--;
 	return endy;
 }
 //pop
