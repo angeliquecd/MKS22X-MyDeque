@@ -11,45 +11,51 @@ public class Calculator{
       int index2 = 0;
       for (int a=0;a<everything.length;a++){
         if (isnum(everything[a])) {
-          values.addLast(Double.parseDouble(everything[a]));
+          values.addLast(Double.parseDouble(everything[a]));//fills up deque with all numbers
           index1++;}
         else {
           operations[index2]=everything[a];
           index2++;
         }
       }
-      int i=0;
       int j=0;
-      boolean starting=true;
-      while (values.size()>2||starting){
+      while (values.size()>1){
         double primary = values.removeFirst();
-        double secondary= values.getFirst();
-        System.out.println("primary: "+primary+" secondary: "+secondary+"size: "+values.size());
+        double secondary= values.removeFirst();//takes two parts of the binary operation
+        //System.out.println("primary: "+primary+" secondary: "+secondary+"size: "+values.size());
         if (operations[j].equals("+")){
-          System.out.println("here");
-          System.out.println(values);
+          //System.out.println("here");
+        //  System.out.println(values);
           double sum = primary+secondary;
-          System.out.println(sum);
-          values.addLast(sum);
-          values.removeFirst();
-          System.out.println(values);
+        //  System.out.println(sum);
+          values.addFirst(sum);
+      //    System.out.println(values);
         }
         else if (operations[j].equals("-")){
-          values.addFirst(primary-secondary);
+          double diff = primary-secondary;
+        //  System.out.println(sum);
+          values.addFirst(diff);
         }
         else if (operations[j].equals("/")){
-          values.addFirst(primary*secondary);
+          double quo = primary/secondary;
+        //  System.out.println(sum);
+          values.addFirst(quo);
         }
         else if (operations[j].equals("*")){
-          values.addFirst(primary/secondary);
+          double pro = primary*secondary;
+        //  System.out.println(sum);
+          values.addFirst(pro);
         }
-        i+=2;
+        else if (operations[j].equals("%")){
+          double mod = primary*secondary;
+        //  System.out.println(sum);
+          values.addFirst(mod);
+        }
         j++;
-        starting=false;
       }
-      System.out.println(values);
-      System.out.println(debug(operations));
-      System.out.println(debug(everything));
+      //System.out.println(values);
+      //System.out.println(debug(operations));
+    //  System.out.println(debug(everything));
       return values.getLast();
     }
     public static boolean isnum(String a){
@@ -77,5 +83,10 @@ public class Calculator{
     }
     public static void main(String[] args){
       System.out.println(eval("3 5 +"));
+      System.out.println(eval("10 2.0 +"));
+      System.out.println(eval("11 3 - 4 + 2.5 *") );
+      System.out.println(eval("8 2 + 99 9 - * 2 + 9 -")) ;
+      System.out.println(eval("1 2 3 4 5 + * - -")) ;
+
     }
 }
