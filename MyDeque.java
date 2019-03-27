@@ -85,7 +85,7 @@ public String debug(){
       if (element == null) throw new NullPointerException();
       if (end==capacity-1){
         data[capacity-1]=element;
-        end=capacity-1;
+        end=capacity-1;//won't work later on!
         }
         else{
           data[end+1]=element;
@@ -104,8 +104,9 @@ catch (NullPointerException e){
     try{
     if (size==0) throw new NoSuchElementException();
     E toreturn = data[start];
-    start-=1;
-	size--;
+    if(size!=1){
+    start+=1;}
+	   size--;
   return toreturn;
 }
 catch(NoSuchElementException e){
@@ -118,8 +119,9 @@ catch(NoSuchElementException e){
     try{
   if (size==0) throw new NoSuchElementException();
 	E endy =data[end];
+  if (size!=1){
 	end-=1;
-	size--;
+	size--;}
 	return endy;
 }
   catch (NoSuchElementException e){
