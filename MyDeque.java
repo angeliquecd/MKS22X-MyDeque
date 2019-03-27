@@ -62,6 +62,8 @@ public String debug(){
     if (element == null) throw new NullPointerException();
     if(size==0){//when list is empty
         data[0] = element;
+        start=0;
+        end=0;
       }
     else if(start == 0){//if only one element has been added(or just resized)
         data[capacity-1] = element;//adds it to the very back of the array
