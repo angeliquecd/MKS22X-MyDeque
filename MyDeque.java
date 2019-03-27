@@ -82,8 +82,8 @@ public String debug(){
       int capacity=data.length;//makes use of full array
       if (element == null) throw new NullPointerException();
       if (end==capacity-1){
-        data[capacity-2]=element;
-        end=capacity-2;//won't work later on!
+        data[0]=element;
+        end=0;//won't work later on!
         }
       else if (size==0){
         data[0]=element;
@@ -121,6 +121,11 @@ public String debug(){
 	E endy =data[end];
   if (end!=0){
 	end-=1;
+}
+else{
+  if (size!=1){
+    end = data.length-1;
+  }
 }
   size--;
 	return endy;
