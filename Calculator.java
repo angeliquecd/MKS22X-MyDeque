@@ -3,10 +3,22 @@ public class Calculator{
     /*Evaluate a postfix expression stored in s.
      *Assume valid postfix notation, separated by spaces.
      */
+     public static double eval2(String s){
+       MyDeque<String> values = new MyDeque<String>(s.length());
+       String[] stuff = s.split(" ");
+       int index=0;
+       int returner=0;
+       while(values.size()>1){
+         if (!isnum(stuff[index])){
+           int first = 
+         }
+       }
+     }
     public static double eval(String s){
       String[] operations = new String[s.length()];
       MyDeque<Double> values = new MyDeque<Double>(s.length());
       String[] everything =s.split(" ");
+
       int index1 =0;
       int index2 = 0;
       for (int a=0;a<everything.length;a++){
@@ -18,6 +30,8 @@ public class Calculator{
           index2++;
         }
       }
+            System.out.println(debug(everything));
+            System.out.println(debug(operations));
       int j=0;
       while (values.size()>1){
         double primary = values.removeFirst();
