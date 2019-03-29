@@ -46,7 +46,7 @@ public class Calculator{
             //   System.out.println(values);
            }
            else if (place.equals("%")){
-             double mod = primary*secondary;
+             double mod = primary%secondary;
            //  System.out.println(sum);
              values.addLast(mod);
             //  System.out.println(values);
@@ -198,7 +198,7 @@ public class Calculator{
       //System.out.println(debug(operations));//more proof that i tried
     //  System.out.println(debug(everything));
       return values.getLast();
-    }
+      }
 
     public static boolean isnum(String a){
       try{
