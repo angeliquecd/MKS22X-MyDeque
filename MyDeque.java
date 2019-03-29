@@ -2,6 +2,7 @@ import java.util.*;
 public class MyDeque<E>{
   private E[] data;
   private int size, start, end;
+  //end stuff goes at the beginning and beginning at the end
 
 @SuppressWarnings("unchecked")
   public MyDeque(){
@@ -103,10 +104,17 @@ public String debug(){
 
   public E removeFirst(){
     if (size==0) throw new NoSuchElementException();
+    int capacity = data.length;
     E toreturn = data[start];
     if(size!=1){
+if (start!=capacity-1){
     start+=1;
    size--;}
+else {
+  size--;
+  start=0;
+}
+ }
     else{
       size=0;
       start=0;
