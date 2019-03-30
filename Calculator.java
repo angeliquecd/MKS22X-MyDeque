@@ -53,7 +53,7 @@ public class Calculator{
            }
          }//adds values to the end after doing the stuff so that you can work with them again
        }
-       return values.getFirst();
+       return values.getLast();
      }
      public static double eval3(String s){
        MyDeque<Double> values = new MyDeque<Double>(s.length());
@@ -229,6 +229,7 @@ public class Calculator{
       System.out.println(eval("11 3 - 4 + 2.5 *") );
       System.out.println(eval("8 2 + 99 9 - * 2 + 9 -")) ;
       System.out.println(eval("1 2 3 4 5 + * - -")) ;
+      System.out.println(eval("4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 + + + + + + + + + + + + + + + + + + + + + + + + + + "));
 /*
       System.out.println("Answer: " + eval2("3 5 +"));//8
       System.out.println("Answer: " +eval2("10 2.0 +"));//12
